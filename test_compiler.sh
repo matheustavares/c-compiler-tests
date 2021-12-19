@@ -6,6 +6,16 @@ cmp=$1
 success_total=0
 failure_total=0
 
+if ! test -f "$cmp"
+then
+	echo "error: no such file '$cmp'"
+	exit 1
+elif ! test -x "$cmp"
+then
+	echo "error: '$cmp' is not executable"
+	exit 1
+fi
+
 print_test_name () {
     test_name=$1
     printf '%s' "$test_name"
