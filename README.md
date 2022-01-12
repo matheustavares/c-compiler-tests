@@ -21,11 +21,9 @@ To test from stage 1 to stage 6,
 
 In order to use this script, your compiler needs to follow this spec:
 
-1. It can be invoked from the command line, taking only a C source file as an argument, e.g.: `./YOUR_COMPILER /path/to/program.c`
+1. It can be invoked from the command line, taking only C source file as an argument and an option `-o` to name the output file, e.g.: `./YOUR_COMPILER -o out.bin /path/to/program.c`
 
-2. When passed `program.c`, it generates executable `program` in the same directory.
-
-3. It doesn’t generate assembly or an executable if parsing fails (this is what the test script checks for invalid test programs).
+2. It doesn’t generate assembly or an executable if parsing fails (this is what the test script checks for invalid test programs).
 
 The script doesn’t check whether your compiler outputs sensible error messages, but you can use the invalid test programs to test that manually.
 

@@ -6,13 +6,9 @@ cmp=$1
 success_total=0
 failure_total=0
 
-if ! test -f "$cmp"
+if ! command -v "$cmp" >/dev/null 2>&1
 then
-	echo "error: no such file '$cmp'"
-	exit 1
-elif ! test -x "$cmp"
-then
-	echo "error: '$cmp' is not executable"
+	echo "error: no such file/command '$cmp'"
 	exit 1
 fi
 
@@ -73,7 +69,7 @@ test_stage () {
         test_name="${base##*valid/}"
 
         print_test_name $test_name
-        $cmp $prog 2>/dev/null
+        $cmp -o "$base" $prog 2>/dev/null
         status=$?
 
         if [[ $test_name == "skip_on_failure"* ]]; then
@@ -117,7 +113,7 @@ test_stage () {
         base="${prog%.*}" #name of executable (filename w/out extension)
         test_name="${base##*invalid/}"
 
-        $cmp $prog >/dev/null 2>&1
+        $cmp -o "$base" $prog >/dev/null 2>&1
         status=$? #failed, as we expect, if exit code != 0
         print_test_name $test_name
 
