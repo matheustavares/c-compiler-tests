@@ -151,14 +151,10 @@ if test 1 -lt $#; then
    for i in `seq 2 $#`; do
        test_stage ${testcases[$i-1]}
    done
-   total_summary
-   exit 0
+else
+    for i in `ls -dv stage_* | sed s/stage_//`; do
+        test_stage $i
+    done
 fi
-
-num_stages=10
-
-for i in `seq 1 $num_stages`; do
-    test_stage $i
-done
 
 total_summary
